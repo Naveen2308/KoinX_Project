@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Koinx Backend Task</h1>
+    <form id="form">
+        <select id="coin" name="coin">
+            <option value="bitcoin">Bitcoin</option>
+            <option value="matic">Matic Network</option>
+            <option value="ethereum">Ethereum</option>
+        </select>
+        <button id="submit" type="submit">Submit</button>
+    </form>
+    <div id="response"></div>
+    <div id="deviation"></div>
+
+    <script>
+        document.getElementById('form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const coin = document.getElementById('coin').value; 
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ coin }), 
+                });
+
+                const result = await response.json(); 
+                document.getElementById('response').innerText = `Status: ${JSON.stringify(result.status)}}`;
+                document.getElementById('deviation').innerText = `Deviation: ${JSON.stringify(result.deviation)}`;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                document.getElementById('response').innerText = "Error fetching data.";
+            }
+        })
+    </script>
+</body>
+</html>
