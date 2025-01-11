@@ -98,10 +98,10 @@ app.post('/', async (req, res) => {
     const { coin } = req.body;
     try {
         
-        const response = await axios.get(`http://localhost:3000/status`, {
+        const response = await axios.get(`https://koinx-project-mc48.onrender.com/status`, {
             params: { coin }
         });
-        const deviation = await axios.get(`http://localhost:3000/deviation`, {
+        const deviation = await axios.get(`https://koinx-project-mc48.onrender.com/deviation`, {
             params: { coin }
         });
 
